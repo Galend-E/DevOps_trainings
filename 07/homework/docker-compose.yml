@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  maven:
+    build: maven
+    volumes:
+      - type: bind
+        source: ./build/hello-1.0.war
+        target: /home/boxfuse-sample-java-war-hello/target/hello-1.0.war
+
+  tomcat:
+    image: tomcat:8.0-slim
+    volumes:
+      - type: bind
+        source: ./build/hello-1.0.war
+        target: /usr/local/tomcat/webapps/hello-1.0.war
