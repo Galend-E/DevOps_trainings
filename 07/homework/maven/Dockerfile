@@ -5,4 +5,4 @@ RUN apt-get update \
 WORKDIR /home
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
 RUN mvn package -f boxfuse-sample-java-war-hello/pom.xml \
-    && boxfuse-sample-java-war-hello/target find -type f,d ! -name '*.war' | xargs rm -rf
+    && find boxfuse-sample-java-war-hello/target -type f,d ! -name '*.war' | xargs rm -rf
