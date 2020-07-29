@@ -10,6 +10,8 @@ services:
 
   tomcat:
     image: tomcat:8.0-slim
+    ports:
+      - "81:8080"
     volumes:
       - type: volume
         source: build
