@@ -4,14 +4,18 @@ services:
   maven:
     build: maven
     volumes:
-      - "build:/home/boxfuse-sample-java-war-hello/target"
+      - type: volume
+        source: build
+        target: /home/boxfuse-sample-java-war-hello/target
 
-  tomcat:
-    image: tomcat:8.0-slim
+  web:
+    image: tomcat:8.0-alpine
     ports:
       - "8081:8080"
     volumes:
-      - "build:/usr/local/tomcat/webapps"
+      - type: volume
+        source: build
+        target: /usr/local/tomcat/webapps
 
 volumes:
   build:
