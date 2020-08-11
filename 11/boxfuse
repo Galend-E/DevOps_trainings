@@ -1,0 +1,24 @@
+ pipeline {
+    agent any
+    tools {
+        maven 'm3'
+    }
+
+    stages {
+        stage ('git') {
+            steps {
+                git 'https://github.com/Galend-E/boxfuse.git'
+            }
+        }
+        stage ('build') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage ('deploy') {
+            steps {
+                deploy adapters: [tomcat8(credentialsId: '0043fb6d-fa92-4ff0-b156-946929cedd37', path: '', url: 'http://192.168.212.94:8080')], contextPath: 'boxfuse', war: '**/*.war'
+            }
+        }
+    }
+}
